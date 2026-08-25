@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       PSYCH SCHOOL CLIENT DEMO — SEED-style + INTERACTIVE/ATTRACTIVE
+       Hero carousel · count-up stats · scroll reveal · interactive
+       program+fee selector · scrollspy · back-to-top · trust marquee
+       · floating decor · hover micro-interactions.
+       ------------------------------------------------------------
+       RE-BRAND FOR EACH SCHOOL (find-and-replace, marked ★):
+         SCHOOL  / PHONE / WHATSAPP / EMAIL /  AREA-PIN / CITY/CENTRES
+         (see ★ markers and JS at bottom).
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Little Blossoms Playschool — Best Playschool in Maduravoyal, Noombal | Chennai 600095</title>
+  <meta name="description" content="Little Blossoms Playschool — a bright, loved playschool & daycare in Maduravoyal, near Noombal, Chennai 600095. Infant Care to UKG, exact-age programs, CCTV-safe campus. Admissions open — enrol today." />
+  <meta name="keywords" content="playschool in Maduravoyal, playschool near Noombal, best preschool Maduravoyal 600095, nursery Maduravoyal, daycare Noombal, kindergarten Maduravoyal" />
+  <meta name="geo.region" content="IN-TN" />
+  <meta name="geo.placename" content="Maduravoyal, Chennai" />
+  <meta name="theme-color" content="#F4C324" />
+
+  <meta property="og:title" content="Little Blossoms Playschool — Your Search Stops Here · Maduravoyal Chennai" />
+  <meta property="og:description" content="Infant Care to UKG, exact-age programs, CCTV-safe campus, beloved by parents near Noombal. Enrol today." />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  { "@context":"https://schema.org","@type":"Nursery","name":"Little Blossoms Playschool",
+    "description":"Playschool and daycare in Maduravoyal, Chennai — Infant Care, Play Group, PreSchool, LKG, UKG and full-day daycare.",
+    "address":{"@type":"PostalAddress","streetAddress":"Street Name, Maduravoyal","addressLocality":"Chennai","addressRegion":"Tamil Nadu","postalCode":"600095","addressCountry":"IN"},
+    "telephone":"+91-PHONENUMBER","openingHours":"Mo-Sa 08:00-18:30",
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"52"} }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --yellow:#F4C324; --yellow-d:#e2af0e; --yellow-grad:linear-gradient(135deg,#ffcf4d,var(--yellow));
+      --blue:#81C8EB;   --blue-d:#5fb0dd;   --blue-grad:linear-gradient(135deg,#9fd7f2,var(--blue));
+      --ink:#22314d; --grey:#5c6b7f; --footer:#F2F2F2; --green:#3a9d6e; --white:#fff;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+    h1,h2,h3{font-family:'Fredoka','Nunito',sans-serif;font-weight:700;letter-spacing:.01em;text-transform:uppercase;line-height:1.12}
+
+    /* ---------- Reveal-on-scroll ---------- */
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    .btn{position:relative;display:inline-block;background:var(--yellow-grad);color:#fff;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:15px 30px;border-radius:4px;box-shadow:0 8px 20px -8px rgba(226,175,14,.7);border:none;cursor:pointer;font-family:inherit;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
+    .btn::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .5s ease}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(226,175,14,.75)}
+    .btn:hover::after{left:120%}
+    .btn-blue{background:var(--blue-grad);box-shadow:0 8px 20px -8px rgba(95,176,221,.7)}
+    .btn-navy{background:linear-gradient(135deg,#35486b,var(--ink));box-shadow:0 8px 20px -10px rgba(34,49,77,.6)}
+    .btn-wa{background:linear-gradient(135deg,#4cbb86,var(--green));box-shadow:0 8px 20px -8px rgba(58,157,110,.6)}
+
+    /* ---------- Flower divider (five-petal blossoms + petals, moving) ---------- */
+    .cloud-wrap{position:relative;z-index:3;display:block;margin-bottom:-42px;pointer-events:none;overflow:hidden}
+    .cloud-wrap svg{display:block;width:120%;height:74px;margin-left:-10%;animation:drift 14s ease-in-out infinite alternate}
+    .cloud-yellow{color:var(--yellow)}
+    .cloud-blue{color:var(--blue)}
+    @keyframes drift{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
+
+    /* ---------- Top bar ---------- */
+    .topbar{background:var(--ink);color:#c9d4e2;font-size:13px;font-weight:600;position:relative;z-index:5}
+    .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+    .topbar a{color:var(--yellow);text-decoration:none}
+    .topbar .gift{display:none}
+    @media(min-width:720px){.topbar .gift{display:inline-flex;align-items:center;gap:6px}}
+
+    /* ---------- Header ---------- */
+    header{background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid #eef2f6;position:sticky;top:0;z-index:50;transition:box-shadow .3s ease}
+    header.scrolled{box-shadow:0 10px 30px -18px rgba(34,49,77,.4)}
+    nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+    .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+    .brand .mark{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#ffe27a,var(--yellow) 70%);display:grid;place-items:center;color:#fff;font-weight:900;font-size:17px;box-shadow:0 6px 14px -6px rgba(226,175,14,.55);animation:spin-slow 12s linear infinite}
+    @keyframes spin-slow{to{transform:rotate(360deg)}}
+    .brand .nm{font-family:'Fredoka','Nunito',sans-serif;font-weight:700;font-size:19px;color:var(--ink);line-height:1.05}
+    .brand .nm small{display:block;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--blue-d);font-weight:700}
+    .nav-links{display:flex;gap:22px;align-items:center}
+    .nav-links a{color:var(--ink);text-decoration:none;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em;position:relative;padding:4px 0}
+    .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:3px;border-radius:3px;background:var(--yellow);transition:width .25s ease}
+    .nav-links a:hover::after{width:100%}
+    .nav-links a.active{color:var(--blue-d)}
+    .nav-links a.active::after{width:100%}
+    .nav-links a.cta{background:var(--yellow-grad);color:#fff;padding:9px 18px;border-radius:4px}
+    .nav-links a.cta::after{display:none}
+    .menu-toggle{display:none;background:none;border:none;font-size:26px;color:var(--ink);cursor:pointer}
+
+    /* ---------- HERO + CAROUSEL ---------- */
+    .hero{position:relative;color:#fff;overflow:hidden;background:linear-gradient(120deg,#2d9cc9 0%,var(--blue) 50%,#8fcef0 100%);background-size:200% 200%;animation:heroGrad 14s ease infinite}
+    @keyframes heroGrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 20%, rgba(255,255,255,.22), transparent 44%)}
+    /* floating bubbles */
+    .hero .bub{position:absolute;border-radius:50%;background:rgba(255,255,255,.14);animation:floaty 8s ease-in-out infinite}
+    .hero .b1{width:120px;height:120px;top:12%;left:6%}
+    .hero .b2{width:70px;height:70px;top:64%;left:16%;animation-delay:1.6s}
+    .hero .b3{width:160px;height:160px;bottom:-40px;right:4%;animation-delay:3s}
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+    /* floating blossom accent */
+    .blossom{position:absolute;opacity:.55;animation:floaty 9s ease-in-out infinite;pointer-events:none}
+    .blossom svg{display:block;width:100%;height:100%}
+    .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;padding-top:42px;padding-bottom:56px}
+    .hero-content{position:relative}
+    .h-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.22);color:#fff;font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:8px 16px;border-radius:999px;margin-bottom:16px}
+    .h-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:pulse 1.6s infinite}
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
+    .slide{display:none;animation:fadeUp .6s ease}
+    .slide.on{display:block}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    .slide h1{font-size:clamp(28px,4.4vw,48px);margin-bottom:14px}
+    .slide p{font-size:17px;color:#f2fbff;max-width:480px;margin-bottom:8px}
+    .dots{display:flex;gap:8px;margin:14px 0 6px}
+    .dots button{width:11px;height:11px;border-radius:50%;border:none;background:rgba(255,255,255,.4);cursor:pointer;transition:.25s}
+    .dots button.on{background:#fff;width:26px;border-radius:6px}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px}
+    .hero-trust{display:flex;gap:30px;margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.3)}
+    .hero-trust .t b{font-size:22px;font-weight:900;display:block;color:#fff}
+    .hero-trust .t span{font-size:12px;color:#e6f6ff}
+    .hero .hpic{position:relative;width:100%;aspect-ratio:1/1;border-radius:50%;font-size:14px;display:grid;place-items:center;font-weight:700;text-align:center;color:#a87700;background:radial-gradient(circle at 35% 30%,#ffe27a,var(--yellow));box-shadow:0 24px 50px -18px rgba(0,0,0,.45);animation:bob 6s ease-in-out infinite;overflow:hidden}
+    .hero .hpic img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+    .hero .hpic::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:3px dashed rgba(255,255,255,.5);animation:spin-slow 20s linear infinite;pointer-events:none}
+    @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+    /* ---------- Intro ---------- */
+    .intro{padding:60px 0 56px}
+    .intro .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:center}
+    .intro .kicker{display:inline-block;background:#f1f7fb;color:var(--blue-d);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:16px}
+    .intro h2{font-size:clamp(22px,3vw,32px);color:var(--ink);margin-bottom:16px}
+    .intro p{color:var(--grey);font-size:16px;margin-bottom:20px}
+    .intro .ipic{position:relative;width:100%;aspect-ratio:1/1;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;text-align:center;background:radial-gradient(circle at 35% 30%,#a7dbf2,var(--blue));box-shadow:0 20px 44px -20px rgba(95,176,221,.5);overflow:hidden}
+    .intro .ipic img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+    .intro .ipic::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:3px dashed rgba(95,176,221,.5);animation:spin-slow 24s linear infinite}
+
+    /* ---------- Enrol ---------- */
+    .enrol{background:var(--yellow);color:var(--ink)}
+    .enrol .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:start;padding:66px 24px 84px}
+    .enrol .head h2{font-size:clamp(24px,3vw,34px);color:var(--ink);margin-bottom:12px}
+    .enrol .head p{color:#6b5a12;font-size:15.5px;max-width:420px;margin-bottom:22px}
+    .enrol .side{display:flex;flex-direction:column;gap:18px}
+    .vcard{background:#fff;border-radius:12px;padding:24px;box-shadow:0 24px 54px -26px rgba(0,0,0,.28);transition:transform .25s ease}
+    .vcard:hover{transform:translateY(-4px)}
+    .vcard h4{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-d);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+    .vcard .addr{font-size:14px;color:var(--ink);line-height:1.7}
+    .vcard .addr b{color:var(--ink)}
+    .vcard .map{border-radius:10px;overflow:hidden;margin-top:12px;border:1px solid #eef2f6;line-height:0}
+    .vcard .map iframe{width:100%;height:190px;border:0;display:block}
+    .vcard .map-link{display:inline-block;margin-top:12px;font-weight:800;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-d);text-decoration:none}
+    .vcard .map-link:hover{color:var(--yellow-d)}
+    /* Find Us — address + map side by side */
+    .find-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:22px;align-items:stretch}
+    .find-grid .vcard{display:flex;flex-direction:column}
+    .find-grid .vcard .map{margin-top:0;flex:1}
+    .find-grid .vcard .map iframe{height:100%;min-height:280px}
+    .find-us .addr a{color:var(--blue-d);text-decoration:none;font-weight:600}
+    .find-us .addr a:hover{color:var(--yellow-d)}
+    .form{background:#fff;border-radius:12px;padding:32px;color:var(--ink);box-shadow:0 30px 64px -30px rgba(0,0,0,.3);transition:transform .25s ease}
+    .form:hover{transform:translateY(-4px)}
+    .form h3{font-size:18px;margin-bottom:2px}
+    .form .sub{font-size:12.5px;color:var(--grey);margin-bottom:8px}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form label{display:block;font-weight:700;font-size:12.5px;margin:12px 0 5px;color:var(--ink);text-transform:uppercase;letter-spacing:.04em}
+    .form input,.form select,.form textarea{width:100%;padding:12px 13px;border:1.5px solid #e6ecf1;border-radius:6px;font-size:14.5px;font-family:inherit;background:#fff;color:var(--ink);transition:border .15s ease,box-shadow .15s ease}
+    .form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(129,200,235,.25)}
+    .form textarea{resize:vertical;min-height:58px}
+    .form .btn{width:100%;margin-top:18px}
+    .form .priv{font-size:11.5px;color:#9aa6b5;text-align:center;margin-top:10px}
+    /* interactive fee hint */
+    .feehint{display:none;margin-top:14px;padding:12px 14px;background:#f1f7fb;border-left:4px solid var(--blue);border-radius:6px;font-size:13.5px;font-weight:600;color:var(--ink);animation:fadeUp .4s ease}
+    .feehint.show{display:block}
+    .feehint b{color:var(--blue-d)}
+
+    /* ---------- Sections ---------- */
+    section.sec{padding:66px 0}
+    .sec-head{max-width:680px;margin:0 auto 42px;text-align:center}
+    .sec-head .kicker{display:inline-block;color:var(--blue-d);font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+    .sec-head h2{font-size:clamp(23px,3.3vw,34px);color:var(--ink);position:relative;display:inline-block}
+    .sec-head h2::after{content:"";display:block;width:0;height:4px;border-radius:4px;background:var(--yellow);margin:10px auto 0;transition:width .6s ease}
+    .sec-head.in h2::after{width:80px}
+    .sec-head p{color:var(--grey);font-size:16px;margin-top:10px}
+
+    .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .pillar{background:#fff;border:1px solid #eef2f6;border-radius:10px;padding:32px 26px;text-align:center;border-bottom:4px solid var(--blue);transition:transform .25s ease,box-shadow .25s ease;cursor:default}
+    .pillar:hover{transform:translateY(-8px);box-shadow:0 24px 50px -24px rgba(34,49,77,.35)}
+    .pillar .icon{width:64px;height:64px;border-radius:50%;background:#f1f7fb;display:grid;place-items:center;font-size:28px;margin:0 auto 16px;transition:transform .3s ease}
+    .pillar:hover .icon{transform:scale(1.15) rotate(-6deg)}
+    .pillar h3{font-size:16px;margin-bottom:10px}
+    .pillar p{font-size:14px;color:var(--grey)}
+
+    /* ---------- Programs + trust marquee ---------- */
+    .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .prog{background:#fff;border:1px solid #eef2f6;border-radius:12px;padding:26px 22px;text-align:center;transition:transform .25s ease,box-shadow .25s ease;position:relative}
+    .prog:hover{transform:translateY(-8px);box-shadow:0 26px 54px -26px rgba(34,49,77,.4)}
+    .prog .picon{width:72px;height:72px;margin:0 auto 14px;border:3px solid var(--yellow);border-radius:50%;display:grid;place-items:center;font-size:30px;transition:transform .35s ease,border-color .3s ease}
+    .prog:hover .picon{transform:scale(1.12) rotate(6deg);border-color:var(--blue)}
+    .prog:nth-child(2) .picon,.prog:nth-child(5) .picon{border-color:var(--blue)}
+    .prog:nth-child(3) .picon{border-color:#7fc7a0}
+    .prog:nth-child(4) .picon{border-color:#f096bc}
+    .prog:nth-child(2):hover .picon,.prog:nth-child(5):hover .picon{border-color:var(--yellow)}
+    .prog .age{display:inline-block;background:var(--yellow);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:12px}
+    .prog:nth-child(2) .age,.prog:nth-child(4) .age{background:var(--blue)}
+    .prog h3{font-size:16px;margin-bottom:8px}
+    .prog p{font-size:13.5px;color:var(--grey);margin-bottom:10px}
+    .prog .dur{font-size:12px;color:var(--blue-d);font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+
+    /* trust marquee */
+    .marquee{overflow:hidden;background:#fff;border-top:1px solid #eef2f6;border-bottom:1px solid #eef2f6;padding:16px 0}
+    .marquee-track{display:flex;gap:48px;width:max-content;animation:scrollx 22s linear infinite}
+    .marquee:hover .marquee-track{animation-play-state:paused}
+    .marquee-track span{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+    .marquee-track span::before{content:"✦";color:var(--yellow)}
+    @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* ---------- Facilities / fees ---------- */
+    .fac{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px}
+    .fac .f{display:flex;align-items:center;gap:14px;background:#f1f7fb;border-radius:8px;padding:16px 18px;transition:transform .2s ease,background .2s ease}
+    .fac .f:hover{transform:translateY(-4px);background:#e6f2fa}
+    .fac .f .fi{width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+    .fac .f span{font-weight:800;font-size:13px;color:var(--ink);text-transform:uppercase;letter-spacing:.03em}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .panel{background:#fff;border:1px solid #eef2f6;border-radius:10px;padding:30px;border-top:5px solid var(--yellow);transition:transform .25s ease,box-shadow .25s ease}
+    .panel:hover{transform:translateY(-4px);box-shadow:0 22px 46px -24px rgba(34,49,77,.28)}
+    .panel:nth-child(2){border-top-color:var(--blue)}
+    .panel h3{font-size:17px;margin-bottom:18px}
+    .row{display:flex;justify-content:space-between;align-items:center;padding:11px 2px;border-bottom:1px dashed #edf1f5}
+    .row:hover .val{transform:scale(1.08)}
+    .row .name{font-weight:700} .row .val{font-weight:900;color:var(--blue-d);transition:.2s} .row .hr{color:var(--grey)}
+    .note{font-size:12px;color:#9aa6b5;margin-top:14px}
+
+    /* ---------- Testimonials ---------- */
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .testi{background:#f1f7fb;border-radius:12px;padding:28px;text-align:center;transition:transform .25s ease,box-shadow .25s ease;cursor:default}
+    .testi:hover{transform:translateY(-6px);box-shadow:0 22px 46px -24px rgba(95,176,221,.5)}
+    .testi .av{width:60px;height:60px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-weight:900;font-size:22px;color:#fff;margin:0 auto 14px;animation:bob 5s ease-in-out infinite}
+    .testi:nth-child(2) .av{background:var(--blue);animation-delay:1s}
+    .testi:nth-child(3) .av{background:#7fc7a0;animation-delay:2s}
+    .testi .stars{color:#f0a800;letter-spacing:3px;font-size:15px;margin-bottom:12px}
+    .testi p{font-size:14.5px;color:var(--ink);font-style:italic;line-height:1.6}
+    .testi .who{margin-top:16px;font-size:12px;color:var(--grey)}
+    .testi .who b{color:var(--ink);font-size:13px;display:block;text-transform:uppercase;letter-spacing:.04em}
+
+    /* ---------- Gallery ---------- */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;justify-items:center}
+    .ph{position:relative;width:100%;max-width:170px;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe27a,var(--yellow));display:grid;place-items:center;color:#a87700;font-weight:700;font-size:12px;text-align:center;padding:12px;box-shadow:0 12px 28px -14px rgba(226,175,14,.5);transition:transform .3s ease;overflow:hidden}
+    .ph img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+    .ph:hover{transform:translateY(-8px) scale(1.04)}
+
+    /* ---------- FAQ ---------- */
+    .faq{max-width:760px;margin:0 auto}
+    .faq details{background:#fff;border:1px solid #eef2f6;border-radius:10px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s ease}
+    .faq details:hover{box-shadow:0 12px 30px -20px rgba(34,49,77,.3)}
+    .faq summary{cursor:pointer;padding:18px 22px;font-weight:800;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;color:var(--ink)}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";font-size:24px;color:var(--blue);font-weight:400;transition:transform .3s ease}
+    .faq details[open] summary::after{transform:rotate(135deg)}
+    .faq details .a{padding:0 22px 20px;color:var(--grey);font-size:14.5px;animation:fadeUp .3s ease}
+
+    /* ---------- Footer / seo / back-to-top ---------- */
+    /* Social strip */
+    .socials{display:flex;justify-content:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+    .socials a{width:46px;height:46px;border-radius:50%;background:#fff;border:2px solid #e6ecf1;display:grid;place-items:center;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;color:var(--ink)}
+    .socials a:hover{transform:translateY(-4px) scale(1.08);border-color:var(--blue);box-shadow:0 12px 26px -12px rgba(95,176,221,.55)}
+    .socials a svg{width:22px;height:22px;fill:currentColor}
+    footer .socials a{background:#fff;border-color:rgba(255,255,255,.15)}
+    .seo-band{background:var(--footer);padding:34px 0}
+    .seo-band h3{font-size:17px;color:var(--ink);margin-bottom:8px}
+    .seo-band p{font-size:13.5px;color:var(--grey);max-width:860px}
+    footer{background:var(--ink);color:#b9c6d8;text-align:center;padding:26px 0;font-size:13px}
+    footer .strapline{font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#fff;font-size:13.5px;margin-bottom:6px}
+    footer a{color:var(--yellow);text-decoration:none}
+
+    /* floating whatsapp */
+    .wa-float{position:fixed;right:20px;bottom:20px;width:60px;height:60px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(58,157,110,.55);z-index:60;transition:transform .2s ease}
+    .wa-float:hover{transform:scale(1.12) rotate(6deg)}
+    .wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(58,157,110,.5);animation:ripple 2s infinite}
+    @keyframes ripple{from{transform:scale(.8);opacity:1}to{transform:scale(1.6);opacity:0}}
+
+    /* back to top */
+    .totop{position:fixed;right:20px;bottom:92px;width:46px;height:46px;border-radius:50%;background:#fff;color:var(--ink);border:2px solid var(--blue);display:grid;place-items:center;font-size:20px;cursor:pointer;z-index:60;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 10px 24px -12px rgba(34,49,77,.4)}
+    .totop.show{opacity:1;pointer-events:auto}
+    .totop:hover{transform:translateY(-4px)}
+
+    @media(max-width:900px){
+      .hero .wrap,.intro .wrap,.enrol .wrap{grid-template-columns:1fr;gap:26px;padding-top:34px;padding-bottom:38px;text-align:center}
+      .dots{justify-content:center}
+      .hero-ctas,.hero-trust{justify-content:center}
+      .hero .hpic,.intro .ipic{max-width:250px;margin:0 auto}
+      .pillars,.prog-grid,.testi-grid,.two-col{grid-template-columns:1fr 1fr}
+      .find-grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(3,1fr)}
+      .frow{grid-template-columns:1fr}
+      .nav-links{position:fixed;inset:58px 0 auto 0;background:#fff;flex-direction:column;padding:20px;gap:16px;box-shadow:0 18px 34px rgba(0,0,0,.15);display:none}
+      .nav-links.open{display:flex}
+      .menu-toggle{display:block}
+      section.sec{padding:46px 0}
+    }
+    @media(max-width:520px){.pillars,.prog-grid,.testi-grid{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+
+  <div class="topbar"><div class="wrap">
+    <span>📍 Maduravoyal, Chennai 600095 — near Noombal ★</span>
+    <span class="gift">🎁 Early-bird admission gift this season</span>
+    <span><a href="tel:+91PHONENUMBER">📞 +91-PHONENUMBER</a> &nbsp;·&nbsp; <a href="mailto:hello@example.com">✉ hello@example.com</a></span>
+  </div></div>
+
+  <header><nav class="wrap">
+    <div class="brand" onclick="scrollToTop()"><span class="mark">LB</span><span class="nm">Little Blossoms<small>Playschool</small></span></div>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+    <div class="nav-links"><a href="#why">Why Us</a><a href="#programs">Programs</a><a href="#fees">Fees</a><a href="#parents">Parents Say</a><a href="#faq">FAQ</a><a class="cta" href="#enrol">Enrol Now</a></div>
+  </nav></header>
+
+  <!-- HERO + CAROUSEL -->
+  <section class="hero">
+    <span class="bub b1"></span><span class="bub b2"></span><span class="bub b3"></span>
+    <span class="blossom" style="top:16%;right:10%;width:30px;animation-delay:2s"><svg viewBox="0 0 24 24"><g fill="#fff"><circle cx="12" cy="6" r="5"/><circle cx="18" cy="12" r="5"/><circle cx="12" cy="18" r="5"/><circle cx="6" cy="12" r="5"/><circle cx="12" cy="12" r="4.5" fill="#ffcf4d"/></g></svg></span>
+    <span class="blossom" style="bottom:16%;left:4%;width:22px;animation-delay:4s"><svg viewBox="0 0 24 24"><g fill="#fff"><circle cx="12" cy="6" r="5"/><circle cx="18" cy="12" r="5"/><circle cx="12" cy="18" r="5"/><circle cx="6" cy="12" r="5"/><circle cx="12" cy="12" r="4.5" fill="#ffcf4d"/></g></svg></span>
+    <div class="wrap">
+      <div class="hero-content">
+        <span class="h-badge"><span class="dot"></span> Admissions Open 2026</span>
+        <div class="slides">
+          <div class="slide on"><h1>Your Search Stops Here.</h1><p>Gift your child a memorable childhood at Maduravoyal's most loved playschool — <strong>near Noombal</strong>.</p></div>
+          <div class="slide"><h1>Where Little Learners Bloom.</h1><p>Infant Care to UKG — exact-age programs built around joy, curiosity and confidence.</p></div>
+          <div class="slide"><h1>Trusted by 200+ Families.</h1><p>A CCTV-safe campus, trained teachers and low 1:8 batches. Your child is safe with us.</p></div>
+        </div>
+        <div class="dots"></div>
+        <div class="hero-ctas">
+          <a href="#enrol" class="btn">Enrol Today</a>
+          <a href="#parents" class="btn btn-blue">What Parents Say</a>
+          <a href="#wa" class="btn btn-wa" onclick="return openWhatsApp()">WhatsApp Us</a>
+        </div>
+        <div class="hero-trust">
+          <div class="t"><b data-count="5">0</b><span>Programs</span></div>
+          <div class="t"><b><span data-count="8">0</span>:1</b><span>Batch Ratio</span></div>
+          <div class="t"><b data-count="200">0</b><span>Happy Families</span></div>
+          <div class="t"><b data-count="4">0</b><span>★ Parent Rating</span></div>
+        </div>
+      </div>
+      <div class="hpic"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3FA6Nziic0gu0RIrRLaKPzZA9wz/f600459d-5223-44b0-a5b1-639e10b2a2fc.png" alt="Children playing with wooden blocks at Little Blossoms Playschool Maduravoyal" /></div>
+    </div>
+  </section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-yellow" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- INTRO -->
+  <section class="intro"><div class="wrap">
+    <div class="ipic reveal"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3FA6Nziic0gu0RIrRLaKPzZA9wz/b499a900-c75f-4fd3-829d-1ddacdddd547.jpg" alt="Teacher reading a picture book to a child at Little Blossoms Playschool" /></div>
+    <div class="reveal">
+      <span class="kicker">Play School in Maduravoyal ★</span>
+      <h2>We put a smile on every child's face.</h2>
+      <p>We give children a memorable childhood. Little Blossoms was started to show that quality pre-school education makes a real difference — especially in the early years. A home-away-from-home, right here near Noombal.</p>
+      <a href="#why" class="btn btn-blue">About Us</a>
+    </div>
+  </div></section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-yellow" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- ENROL (interactive: program -> fee hint) -->
+  <section class="enrol" id="enrol"><div class="wrap">
+    <div class="head reveal">
+      <span class="h-badge" style="background:rgba(255,255,255,.45);color:var(--ink)">Admissions Open</span>
+      <h2>Save a Spot — Enrol Your Child</h2>
+      <p>Tell us a little about your child and choose your centre. We'll call you within the day to schedule a visit &amp; discuss fees.</p>
+      <a href="#wa" class="btn btn-navy" onclick="return openWhatsApp()">WhatsApp Us Directly</a>
+    </div>
+    <form class="form reveal" onsubmit="return submitEnrol(event)">
+      <h3>Enrolment Enquiry</h3>
+      <div class="sub">We'll only use these details to contact you about admission.</div>
+      <div class="frow"><div><label>Parent's Name *</label><input type="text" id="parent" placeholder="Full name" required /></div><div><label>Child's Name *</label><input type="text" id="child" placeholder="Child's full name" required /></div></div>
+      <div><label>Mobile Number *</label><input type="tel" id="mobile" placeholder="10-digit mobile" pattern="[0-9]{10}" required /></div>
+      <label>Preferred Program *</label>
+      <select id="program" required onchange="showFeeHint(this.value)"><option value="">-- Select a program --</option><option value="Infant Care|₹X|8m – 1.5 yrs">Infant Care — 8 months to 1.5 yrs</option><option value="Play Group|₹X|1.5 – 2.5 yrs">Play Group — 1.5 to 2.5 yrs</option><option value="PreSchool|₹X|2.5 – 3.5 yrs">PreSchool — 2.5 to 3.5 yrs</option><option value="LKG|₹X|3.5 – 4.5 yrs">LKG — 3.5 to 4.5 yrs</option><option value="UKG|₹X|4.5 – 5.5 yrs">UKG — 4.5 to 5.5 yrs</option><option value="Full-Day Daycare|₹X|1.5 – 12 yrs">Full-Day Daycare</option></select>
+      <div class="feehint" id="feehint"></div>
+      <div class="frow"><div><label>Preferred City *</label><select id="city" required></select></div><div><label>Preferred Centre *</label><select id="centre" required></select></div></div>
+      <label>Message</label><textarea id="msg" placeholder="Any questions about fees, timings or admission..."></textarea>
+      <button type="submit" class="btn btn-navy">Send Enquiry on WhatsApp</button>
+      <p class="priv">🔒 Your details stay private. We only use them to contact you about admission.</p>
+    </form>
+  </div></section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-blue" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- WHY -->
+  <section class="sec" id="why"><div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">Why Little Blossoms ★</span><h2>A home-away-from-home</h2><p>Parents choose Little Blossoms for caring, structured early-years education right here in Maduravoyal.</p></div>
+    <div class="pillars">
+      <div class="pillar reveal"><div class="icon">🏆</div><h3>Quality Education</h3><p>An NEP-aligned, play-first curriculum that builds language, numbers and confidence.</p></div>
+      <div class="pillar reveal"><div class="icon">🎯</div><h3>Personalised Curriculum</h3><p>Programs matched to each child's age and pace, met exactly where they are.</p></div>
+      <div class="pillar reveal"><div class="icon">🛡️</div><h3>Quality Facilities</h3><p>CCTV-covered, child-proofed, gated campus with trained teachers.</p></div>
+    </div>
+  </div></section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-yellow" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- PROGRAMS -->
+  <section class="sec" id="programs" style="background:var(--footer)"><div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">Programs ★</span><h2>We meet kids where they are</h2><p>Exact-age, research-based programs — from first steps to kindergarten-ready.</p></div>
+    <div class="prog-grid">
+      <div class="prog reveal"><div class="picon">🍼</div><span class="age">8m – 1.5 yrs</span><h3>Infant Care</h3><p>Gentle, watchful care with sensory play.</p><div class="dur">Flexible · full-day</div></div>
+      <div class="prog reveal"><div class="picon">🧸</div><span class="age">1.5 – 2.5 yrs</span><h3>Play Group</h3><p>First steps into structure &amp; social skills.</p><div class="dur">2.5 hrs · 5 days</div></div>
+      <div class="prog reveal"><div class="picon">🎨</div><span class="age">2.5 – 3.5 yrs</span><h3>PreSchool</h3><p>Language, rhymes &amp; early independence.</p><div class="dur">3 hrs · 5 days</div></div>
+      <div class="prog reveal"><div class="picon">📚</div><span class="age">LKG · 3.5 – 4.5 yrs</span><h3>LKG</h3><p>Phonics, numbers &amp; early writing.</p><div class="dur">3.5 hrs · 5 days</div></div>
+      <div class="prog reveal"><div class="picon">✏️</div><span class="age">UKG · 4.5 – 5.5 yrs</span><h3>UKG</h3><p>School-transition focus &amp; confidence.</p><div class="dur">3.5 hrs · 5 days</div></div>
+      <div class="prog reveal"><div class="picon">🌈</div><span class="age">1.5 – 12 yrs</span><h3>Day Care</h3><p>Safe after-school &amp; holiday care.</p><div class="dur">8 AM – 6:30 PM</div></div>
+    </div>
+  </div></section>
+
+  <!-- trust marquee -->
+  <div class="marquee"><div class="marquee-track">
+    <span>Play</span><span>Learn</span><span>Grow</span><span>24×7 CCTV</span><span>Safe Transport</span><span>Happy Kids</span><span>Trained Teachers</span>
+    <span>Play</span><span>Learn</span><span>Grow</span><span>24×7 CCTV</span><span>Safe Transport</span><span>Happy Kids</span><span>Trained Teachers</span>
+  </div></div>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-blue" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- FACILITIES + FEES -->
+  <section class="sec" id="fees" style="padding-top:60px"><div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:28px"><span class="kicker">Facilities</span><h2>Everything a parent needs to feel at ease</h2></div>
+    <div class="fac reveal">
+      <div class="f"><span class="fi">📹</span><span>24×7 CCTV</span></div>
+      <div class="f"><span class="fi">🚌</span><span>Safe Transport</span></div>
+      <div class="f"><span class="fi">🧼</span><span>Hygienic Campus</span></div>
+      <div class="f"><span class="fi">🧸</span><span>Child-Safe Area</span></div>
+      <div class="f"><span class="fi">👩‍🏫</span><span>Trained Teachers</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap two-col">
+    <div class="panel reveal"><h3>💛 Fee Structure</h3>
+      <div class="row"><span class="name">Infant Care</span><span class="val">₹X / m</span></div>
+      <div class="row"><span class="name">Play Group</span><span class="val">₹X / m</span></div>
+      <div class="row"><span class="name">PreSchool</span><span class="val">₹X / m</span></div>
+      <div class="row"><span class="name">LKG</span><span class="val">₹X / m</span></div>
+      <div class="row"><span class="name">UKG</span><span class="val">₹X / m</span></div>
+      <div class="row"><span class="name">Full-Day Daycare</span><span class="val">₹X / m</span></div>
+      <div class="row"><span class="name">Admission</span><span class="val">₹X</span></div>
+      <p class="note">★ Set to the client's real fees.</p>
+    </div>
+    <div class="panel reveal"><h3>🕘 School Timings</h3>
+      <div class="row"><span class="name">Classes</span><span class="hr">8:30 AM – 12:30 PM</span></div>
+      <div class="row"><span class="name">Daycare</span><span class="hr">8:00 AM – 6:30 PM</span></div>
+      <div class="row"><span class="name">Mon – Sat</span><span class="hr" style="color:var(--green);font-weight:900">Open</span></div>
+      <div class="row"><span class="name">Sunday</span><span class="hr">Closed</span></div>
+      <div class="row"><span class="name">Admissions desk</span><span class="hr">9 AM – 6 PM</span></div>
+      <p class="note">★ Confirm exact timings.</p>
+    </div>
+  </div></section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-blue" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- PARENTS -->
+  <section class="sec" id="parents"><div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">Parents Say</span><h2>Trusted by families across Maduravoyal ★</h2></div>
+    <div class="testi-grid">
+      <div class="testi reveal"><div class="av">P</div><div class="stars">★★★★★</div><p>"Our daughter walks in smiling every single day. Her confidence grows every week."</p><div class="who"><b>Priya S. · PreSchool Mom</b>Little Blossoms Maduravoyal</div></div>
+      <div class="testi reveal"><div class="av">R</div><div class="stars">★★★★★</div><p>"We looked at four playschools here; this one felt both safe and genuinely warm."</p><div class="who"><b>Rahul &amp; Meena · Play Group</b>Little Blossoms Maduravoyal</div></div>
+      <div class="testi reveal"><div class="av">K</div><div class="stars">★★★★★</div><p>"A blessing for working parents — structured activities, healthy meals, daily updates."</p><div class="who"><b>Kavitha · Day Care Mom</b>Little Blossoms Maduravoyal</div></div>
+    </div>
+  </div></section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-yellow" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- GALLERY -->
+  <section class="sec" id="gallery" style="background:var(--footer)"><div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">Life at Little Blossoms ★</span><h2>A glimpse inside our world</h2></div>
+    <div class="gallery reveal">
+      <div class="ph"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3FA6Nziic0gu0RIrRLaKPzZA9wz/c804440b-a5e6-4276-86c4-48937a4474f3.jpg" alt="Bright classroom at Little Blossoms Playschool Maduravoyal" /></div><div class="ph"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3FA6Nziic0gu0RIrRLaKPzZA9wz/37773172-f5c4-4f0c-b93c-b4224afeb44b.jpg" alt="Children finger painting at Little Blossoms Playschool" /></div><div class="ph"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3FA6Nziic0gu0RIrRLaKPzZA9wz/be98bc18-acf4-48cf-b53a-1c3ba572f2ae.jpg" alt="Toddlers in the soft play area at Little Blossoms Playschool" /></div><div class="ph"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3FA6Nziic0gu0RIrRLaKPzZA9wz/7372f4ab-a548-4b6d-bf3c-ed206c694daf.png" alt="Annual day celebration at Little Blossoms Playschool" /></div><div class="ph"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3FA6Nziic0gu0RIrRLaKPzZA9wz/75006bde-a0e5-473c-86a5-175161ab4572.png" alt="Little Blossoms Playschool campus with outdoor play area" /></div>
+    </div>
+  </div></section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-blue" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq"><div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">FAQ</span><h2>Questions parents ask us</h2></div>
+    <div class="faq reveal">
+      <details><summary>What is the right age to start playschool?</summary><div class="a">Most children are ready for Play Group between 1.5 and 2.5 years, and infant care from 8 months. Brain development peaks in the first six years, so a gentle, play-based start builds skills that last a lifetime.</div></details>
+      <details><summary>Is the campus safe? How is it monitored?</summary><div class="a">Yes — we run 24×7 CCTV coverage, gated entry, child-proofed classrooms and trained housekeeping staff. Safety is a promise, not a feature.</div></details>
+      <details><summary>What does my child actually learn in a day?</summary><div class="a">Every day balances language, numbers, music, art, motor skills and social play — a structured yet playful routine that builds confidence and school-readiness.</div></details>
+      <details><summary>Do you offer full-day daycare for working parents?</summary><div class="a">Yes. Daycare runs from 8 AM to 6:30 PM with meals, structured activities and rest — with updates to parents through the day.</div></details>
+      <details><summary>How do I book a visit or secure admission?</summary><div class="a">Simply use the enrolment form below, or WhatsApp us. We'll schedule a tour and walk you through fees and the admission process.</div></details>
+    </div>
+  </div></section>
+
+  <!-- CLOUD -->
+  <span class="cloud-wrap cloud-blue" aria-hidden="true"><svg viewBox="0 0 1400 74" preserveAspectRatio="none"><rect width="1400" height="34" fill="currentColor"/><path d="M50,34 C46,56 74,72 100,74 C126,72 154,56 150,34 Z" fill="currentColor"/><path d="M250,34 C246,56 274,72 300,74 C326,72 354,56 350,34 Z" fill="currentColor"/><path d="M450,34 C446,56 474,72 500,74 C526,72 554,56 550,34 Z" fill="currentColor"/><path d="M650,34 C646,56 674,72 700,74 C726,72 754,56 750,34 Z" fill="currentColor"/><path d="M850,34 C846,56 874,72 900,74 C926,72 954,56 950,34 Z" fill="currentColor"/><path d="M1050,34 C1046,56 1074,72 1100,74 C1126,72 1154,56 1150,34 Z" fill="currentColor"/><path d="M1250,34 C1246,56 1274,72 1300,74 C1326,72 1354,56 1350,34 Z" fill="currentColor"/><g fill="rgba(255,255,255,.85)"><circle cx="220" cy="7" r="10"/><circle cx="230.5" cy="13.4" r="10"/><circle cx="224" cy="24.7" r="10"/><circle cx="216" cy="24.7" r="10"/><circle cx="209.5" cy="13.4" r="10"/><circle cx="620" cy="7" r="10"/><circle cx="630.5" cy="13.4" r="10"/><circle cx="624" cy="24.7" r="10"/><circle cx="616" cy="24.7" r="10"/><circle cx="609.5" cy="13.4" r="10"/><circle cx="1020" cy="7" r="10"/><circle cx="1030.5" cy="13.4" r="10"/><circle cx="1024" cy="24.7" r="10"/><circle cx="1016" cy="24.7" r="10"/><circle cx="1009.5" cy="13.4" r="10"/></g><g fill="#ffcf4d"><circle cx="220" cy="17" r="6"/><circle cx="620" cy="17" r="6"/><circle cx="1020" cy="17" r="6"/></g></svg></span>
+
+  <!-- FIND US — address + map side by side -->
+  <section class="sec find-us" id="findus"><div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">Find Us</span><h2>Visit our campus</h2><p>Drop by for a cup of chai and a quick tour — we'd love to show you around.</p></div>
+    <div class="find-grid">
+      <div class="vcard reveal">
+        <h4>📍 Address</h4>
+        <div class="addr"><b>Little Blossoms Playschool</b> ★<br>Street Name, Maduravoyal<br>Chennai, Tamil Nadu — 600095<br>Near Noombal / Poonamallee High Rd</div>
+        <div class="addr" style="margin-top:12px">🕘 Mon – Sat · 9:00 AM – 6:00 PM<br>📞 <a href="tel:+91PHONENUMBER">+91-PHONENUMBER</a><br>✉ hello@example.com</div>
+        <a class="map-link" id="maplink" href="#" target="_blank" rel="noopener">Get Directions ↗</a>
+      </div>
+      <div class="vcard reveal" style="padding:12px">
+        <div class="map"><iframe id="mapframe" title="Little Blossoms Playschool location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      </div>
+    </div>
+  </div></section>
+
+  <div class="seo-band"><div class="wrap">
+    <h3>Playschool &amp; Daycare in Maduravoyal, Noombal — Chennai ★</h3>
+    <p>Looking for the best playschool in Maduravoyal, or a daycare near Noombal, Nolambur or Vanagaram? Little Blossoms Playschool offers Infant Care, Play Group, PreSchool, LKG, UKG and full-day daycare in Chennai 600095 — with a CCTV-safe campus, trained teachers and small batches. Admissions open across Maduravoyal, Noombal, Nolambur, Vanagaram, Mogappair and Porur. Call +91-PHONENUMBER to book a free visit.</p>
+  </div></div>
+
+  <footer><div class="strapline">Maduravoyal's Most Loved Playschool ★</div>
+    <div class="socials">
+      <a id="soc-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.8.07-1.1.05-1.7.24-2.1.4-.5.2-.9.44-1.3.84-.4.4-.64.8-.84 1.3-.16.4-.35 1-.4 2.1C2.5 9.6 2.5 10 2.5 12s0 3.5.06 4.8c.05 1.1.24 1.7.4 2.1.2.5.44.9.84 1.3.4.4.8.64 1.3.84.4.16 1 .35 2.1.4 1.3.06 1.7.06 4.8.06s3.5 0 4.8-.06c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.44 1.3-.84.4-.4.64-.8.84-1.3.16-.4.35-1 .4-2.1.06-1.3.06-1.7.06-4.8s0-3.5-.06-4.8c-.05-1.1-.24-1.7-.4-2.1-.2-.5-.44-.9-.84-1.3-.4-.4-.8-.64-1.3-.84-.4-.16-1-.35-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-3.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg></a>
+      <a id="soc-fb" href="#" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5h1.65V4.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.46-4.05 4.15v2.3H7.5V14h2.7v8h3.3z"/></svg></a>
+      <a id="soc-yt" href="#" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23 7.2s-.23-1.6-.9-2.3c-.87-.9-1.84-.9-2.28-.96C16.9 3.7 12 3.7 12 3.7h-.01s-4.9 0-7.82.24c-.44.06-1.4.06-2.28.96-.67.7-.9 2.3-.9 2.3S.76 9.1.76 11v1.8c0 1.9.23 3.8.23 3.8s.23 1.6.9 2.3c.87.9 2 .87 2.5.96 1.82.18 7.6.24 7.6.24s4.9-.01 7.83-.25c.44-.06 1.4-.06 2.28-.96.67-.7.9-2.3.9-2.3s.23-1.9.23-3.8V11c.01-1.9-.23-3.8-.23-3.8zM9.8 14.9V8.2l6.4 3.36-6.4 3.34z"/></svg></a>
+    </div>
+    <p>© 2026 Little Blossoms Playschool · <a href="#enrol">Enrol Now</a> · <a href="tel:+91PHONENUMBER">Call +91-PHONENUMBER</a></p></footer>
+
+  <!-- WhatsApp float -->
+  <a href="#wa" class="wa-float" onclick="return openWhatsApp()" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.1 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6-.1.2-.1.3-.3.5l-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.9-1c.2-.3.5-.3.8-.2l2 .9c.3.1.4.2.5.4.1.1.1.6-.1 1.3z"/></svg>
+  </a>
+
+  <!-- Back to top -->
+  <button class="totop" id="totop" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+
+  <!-- ===================== JS ===================== -->
+  <script>
+    var SCHOOL="Little Blossoms Playschool"; var PHONE="+91PHONENUMBER";
+    var WA="91WHATSAPPNUMBER"; var EMAIL="hello@example.com";
+    // ★ EDIT these dropdown arrays per school
+    var CITIES=["Chennai","Chennai - Maduravoyal"];
+    var CENTRES={"Chennai":["Maduravoyal","Iyyappanthangal"],"Chennai - Maduravoyal":["Little Blossoms Playschool - Main Centre"]};
+    // ★ EDIT these to the school's real social pages (leave "" to hide that icon)
+    var SOCIAL={instagram:"https://www.instagram.com/",facebook:"https://www.facebook.com/",youtube:"https://www.youtube.com/"};
+    // ★ EDIT: Google Maps embed src for the school's exact location (no-API embed)
+    //   Tip: on Google Maps, click Share → Embed a map → copy the iframe src.
+    //   Default = pin at Noombal/Maduravoyal (13.0517, 80.1357).
+    var MAPSRC="https://www.google.com/maps?q=13.051708,80.135672&z=15&output=embed";
+    var MAPLINK="https://www.google.com/maps/dir/?api=1&destination=13.051708,80.135672";
+    // ★ EDIT the rupee values per program (matches select value "Name|fee|age")
+    var FEES={"Infant Care":"₹X / month","Play Group":"₹X / month","PreSchool":"₹X / month","LKG":"₹X / month","UKG":"₹X / month","Full-Day Daycare":"₹X / month"};
+
+    function waMsg(t){return "https://wa.me/"+WA+"?text="+encodeURIComponent(t);}
+    function openWhatsApp(){window.open(waMsg("Hi "+SCHOOL+", I'd like to book a campus visit for my child."),"_blank");return false;}
+    function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+    /* Wire social links from SOCIAL (hide any empty) */
+    (function(){var m={instagram:"soc-ig",facebook:"soc-fb",youtube:"soc-yt"};for(var k in m){var a=document.getElementById(m[k]);if(a){var u=SOCIAL[k];if(u){a.href=u;}else{a.style.display="none";}}}})();
+    /* Wire map embed + directions link from MAPSRC/MAPLINK */
+    (function(){var f=document.getElementById("mapframe");if(f&&MAPSRC){f.src=MAPSRC;}var l=document.getElementById("maplink");if(l&&MAPLINK){l.href=MAPLINK;}})();
+
+    /* Carousel */
+    (function(){
+      var slides=document.querySelectorAll('.slide'),dots=document.querySelector('.dots'),i=0;
+      slides.forEach(function(s,n){var d=document.createElement('button');d.setAttribute('aria-label',"Go to slide "+(n+1));d.onclick=function(){go(n);};dots.appendChild(d);});
+      var dotEls=dots.querySelectorAll('button');dotEls[0].classList.add('on');
+      function go(n){slides[i].classList.remove('on');dotEls[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('on');dotEls[i].classList.add('on');}
+      setInterval(function(){go(i+1);},4200);
+      document.querySelector('.hero').addEventListener('mouseenter',function(){/*pause on hover not applied to keep simple*/});
+    })();
+
+    /* Count-up stats */
+    (function(){
+      function anim(el){var target=+el.dataset.count,dur=1400,start=null;
+        function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);el.textContent=Math.floor(p*target);if(p<1)requestAnimationFrame(step);else el.textContent=target;}
+        requestAnimationFrame(step);}
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){anim(e.target);io.unobserve(e.target);}});},{threshold:.6});
+      document.querySelectorAll('[data-count]').forEach(function(el){io.observe(el);});
+    })();
+
+    /* Scroll-reveal + scrollspy + header/backtotop */
+    (function(){
+      var rev=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rev.unobserve(e.target);}});},{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(function(el){rev.observe(el);});
+      /* Failsafe: never let content stay hidden (captures / edge cases) */
+      setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(el){el.classList.add('in');});},2500);
+      var secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-links a[href^="#"]');
+      var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id);});}});},{threshold:.5});
+      secs.forEach(function(s){spy.observe(s);});
+      var head=document.querySelector('header'),tt=document.getElementById('totop');
+      window.addEventListener('scroll',function(){var y=window.scrollY;head.classList.toggle('scrolled',y>10);tt.classList.toggle('show',y>500);},{passive:true});
+    })();
+
+    /* Interactive fee hint */
+    function showFeeHint(v){var h=document.getElementById('feehint');if(!v){h.classList.remove('show');return;}
+      var parts=v.split('|'),name=parts[0],fee=FEES[name]||parts[1];
+      h.innerHTML="<b>"+name+"</b> — "+fee+" <span style='color:#6b5a12;font-weight:500'>· "+parts[2]+"</span>";
+      h.classList.add('show');}
+
+    /* City/Centre dropdowns */
+    (function(){var s=document.getElementById('city');CITIES.forEach(function(c){var o=document.createElement('option');o.value=c;o.text=c;s.appendChild(o);});s.value=CITIES[0];fillCentres();s.addEventListener('change',fillCentres);})();
+    function fillCentres(){var city=document.getElementById('city').value,cen=document.getElementById('centre');cen.innerHTML='';(CENTRES[city]||[]).forEach(function(c){var o=document.createElement('option');o.value=c;o.text=c;cen.appendChild(o);});}
+
+    /* Submit to WhatsApp */
+    function submitEnrol(e){e.preventDefault();
+      var p=document.getElementById('parent').value,c=document.getElementById('child').value,m=document.getElementById('mobile').value,
+          rv=document.getElementById('program').value,ct=document.getElementById('city').value,
+          t=document.getElementById('centre').value,g=document.getElementById('msg').value,
+          name=rv?rv.split('|')[0]:'';
+      var tx="Hi "+SCHOOL+", I'd like to enrol my child.\nParent: "+p+"\nChild's Name: "+c+"\nMobile: "+m+"\nProgram: "+name+"\nCity: "+ct+"\nPreferred Centre: "+t+(g?"\nNote: "+g:"");
+      window.open(waMsg(tx),"_blank");return false;}
+  </script>
+</body>
+</html>
