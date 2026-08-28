@@ -178,6 +178,14 @@
     .feehint{display:none;margin-top:14px;padding:12px 14px;background:#f1f7fb;border-left:4px solid var(--blue);border-radius:6px;font-size:13.5px;font-weight:600;color:var(--ink);animation:fadeUp .4s ease}
     .feehint.show{display:block}
     .feehint b{color:var(--blue-d)}
+    /* Thank-you state after submission */
+    .thanks{display:none;text-align:center;padding:26px 18px;background:#f1f7fb;border-radius:12px;margin-top:8px;animation:fadeUp .4s ease}
+    .thanks.show{display:block}
+    .thanks .tick{width:58px;height:58px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:28px;margin:0 auto 12px}
+    .thanks h4{font-size:18px;color:var(--ink);margin-bottom:6px}
+    .thanks p{font-size:13.5px;color:var(--grey);margin-bottom:14px}
+    .thanks .btn{margin:6px 4px}
+    .thanks .btn-plain{background:#fff;color:var(--blue-d);border:2px solid var(--blue);box-shadow:none}
 
     /* ---------- Sections ---------- */
     section.sec{padding:66px 0}
@@ -389,6 +397,13 @@
       <label>Message</label><textarea id="msg" placeholder="Any questions about fees, timings or admission..."></textarea>
       <button type="submit" class="btn btn-navy">Send Enquiry on WhatsApp</button>
       <p class="priv">🔒 Your details stay private. We only use them to contact you about admission.</p>
+      <div class="thanks" id="thanks">
+        <div class="tick">✓</div>
+        <h4>Thank you, enquiry sent!</h4>
+        <p>We've received your details and will call you shortly. Want to reach us right now? Tap WhatsApp below.</p>
+        <a href="#wa" class="btn btn-wa" onclick="return openWhatsApp()">Chat on WhatsApp</a>
+        <button type="button" class="btn btn-plain" onclick="return resetEnrol()">Send another enquiry</button>
+      </div>
     </form>
   </div></section>
 
@@ -556,6 +571,10 @@
     //   Default = pin at Noombal/Maduravoyal (13.0517, 80.1357).
     var MAPSRC="https://www.google.com/maps?q=13.051708,80.135672&z=15&output=embed";
     var MAPLINK="https://www.google.com/maps/dir/?api=1&destination=13.051708,80.135672";
+    // ★★ LEAD CAPTURE — Google Sheets: paste your Apps Script Web App URL here.
+    //   Every submitted enquiry is written to your Sheet (date + all fields).
+    //   Leave "" to disable sheet capture (WhatsApp-only mode).
+    var SHEET_URL="";
     // ★ EDIT the rupee values per program (matches select value "Name|fee|age")
     var FEES={"Infant Care":"₹X / month","Play Group":"₹X / month","PreSchool":"₹X / month","LKG":"₹X / month","UKG":"₹X / month","Full-Day Daycare":"₹X / month"};
 
@@ -616,7 +635,24 @@
           t=document.getElementById('centre').value,g=document.getElementById('msg').value,
           name=rv?rv.split('|')[0]:'';
       var tx="Hi "+SCHOOL+", I'd like to enrol my child.\nParent: "+p+"\nChild's Name: "+c+"\nMobile: "+m+"\nProgram: "+name+"\nCity: "+ct+"\nPreferred Centre: "+t+(g?"\nNote: "+g:"");
-      window.open(waMsg(tx),"_blank");return false;}
+      /* 1) Write to Google Sheet (if configured) */
+      if(SHEET_URL){
+        var frame=document.createElement('iframe');frame.name='_leadframe';frame.style.display='none';
+        var f=document.createElement('form');f.method='POST';f.action=SHEET_URL;f.target='_leadframe';f.style.display='none';
+        document.body.appendChild(frame);document.body.appendChild(f);
+        var data={'Timestamp':new Date().toString(),'Parent':p,'Child':c,'Mobile':m,'Program':name,'City':ct,'Centre':t,'Message':g};
+        for(var k in data){var inp=document.createElement('input');inp.type='hidden';inp.name=k;inp.value=data[k];f.appendChild(inp);}
+        f.submit();
+      }
+      /* 2) Open WhatsApp chat pre-filled (parent taps send) */
+      window.open(waMsg(tx),"_blank");
+      /* 3) Show thank-you screen */
+      var th=document.getElementById('thanks');if(th){th.classList.add('show');document.querySelector('.form').style.display='none';}
+      return false;}
+    function resetEnrol(){
+      var th=document.getElementById('thanks');if(th)th.classList.remove('show');
+      var form=document.querySelector('.form');if(form)form.style.display='';
+      form.reset();return false;}
   </script>
 </body>
 </html>
