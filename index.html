@@ -297,6 +297,38 @@
     .totop.show{opacity:1;pointer-events:auto}
     .totop:hover{transform:translateY(-4px)}
 
+    /* ===== TEMP PROMO (remove before client handover) ===== */
+    /* scrolling promo bar above the WhatsApp float */
+    .promo-bar{position:fixed;left:0;right:0;bottom:0;height:44px;background:var(--ink);color:#fff;z-index:70;display:flex;align-items:center;overflow:hidden;box-shadow:0 -6px 20px rgba(0,0,0,.25)}
+    .promo-bar .promo-track{display:flex;gap:60px;white-space:nowrap;animation:promoScroll 22s linear infinite;font-weight:800;font-size:13.5px;letter-spacing:.04em}
+    .promo-bar .promo-track span{display:inline-flex;align-items:center;gap:8px}
+    .promo-bar .promo-track b{color:var(--yellow)}
+    .promo-bar .promo-track a{color:var(--yellow);text-decoration:none}
+    @keyframes promoScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .promo-bar .promo-x{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;z-index:2}
+    .promo-bar .promo-x:hover{background:rgba(255,255,255,.3)}
+    .wa-float{bottom:128px}
+    /* TEMP: floating "create a website like this" icon (primary spot, remove later) */
+    .site-float{position:fixed;right:20px;bottom:64px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#4cbb86,var(--blue));display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(34,49,77,.45);z-index:70;text-decoration:none;transition:transform .2s ease}
+    .site-float:hover{transform:scale(1.12) rotate(6deg)}
+    .site-float .si{font-size:26px;line-height:1}
+    .site-float::after{content:"Create a website like this";position:absolute;right:70px;top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:6px 11px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+    .site-float:hover::after{opacity:1}
+    .totop{bottom:204px}
+    /* scroll-triggered popup */
+    .promo-modal{position:fixed;inset:0;background:rgba(34,49,77,.55);z-index:90;display:none;align-items:center;justify-content:center;padding:20px}
+    .promo-modal.show{display:flex}
+    .promo-card{background:#fff;border-radius:20px;max-width:420px;width:100%;padding:30px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35);position:relative;animation:promoPop .35s ease}
+    @keyframes promoPop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+    .promo-card .emoji{font-size:40px;margin-bottom:8px}
+    .promo-card h3{font-family:'Fredoka',sans-serif;font-size:21px;color:var(--ink);margin-bottom:8px;text-transform:none;letter-spacing:0}
+    .promo-card p{font-size:14.5px;color:var(--grey);margin-bottom:18px}
+    .promo-card .btn{width:100%;margin-bottom:10px}
+    .promo-card .cancel{background:none;border:none;color:var(--grey);font-weight:700;font-size:13px;cursor:pointer;padding:8px 14px;text-transform:uppercase;letter-spacing:.06em}
+    .promo-card .cancel:hover{color:var(--ink)}
+    .promo-card .x-top{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;color:var(--grey);cursor:pointer}
+    .promo-card .x-top:hover{color:var(--ink)}
+
     @media(max-width:900px){
       .hero .wrap,.intro .wrap,.enrol .wrap{grid-template-columns:1fr;gap:26px;padding-top:34px;padding-bottom:38px;text-align:center}
       .dots{justify-content:center}
@@ -550,6 +582,36 @@
     <p>© 2026 Little Blossoms Playschool · <a href="#enrol">Enrol Now</a> · <a href="tel:+917708143295">Call +917708143295</a></p></footer>
 
   <!-- WhatsApp float -->
+  <!-- TEMP PROMO: scrolling bar above WhatsApp (remove later) -->
+  <div class="promo-bar" id="promoBar">
+    <div class="promo-track">
+      <span>✦ Want a website <b>like this</b> for your school? <a href="https://wa.me/917708143295?text=Hi!%20I%20saw%20your%20website%20and%20would%20like%20to%20enquire%20about%20creating%20a%20website%20like%20this." target="_blank" rel="noopener">WhatsApp me →</a></span>
+      <span>✦ Need to enquire about creating a website like this? <b>+91 77081 43295</b> <a href="https://wa.me/917708143295?text=Hi!%20I'd%20like%20to%20enquire%20about%20creating%20a%20website%20like%20this." target="_blank" rel="noopener">Chat now</a></span>
+      <span>✦ Website creation for schools &amp; businesses — <b>fast, modern, mobile-first</b> <a href="https://wa.me/917708143295?text=Hi!%20Interested%20in%20a%20website%20like%20this." target="_blank" rel="noopener">Enquire →</a></span>
+      <span>✦ Want a website <b>like this</b> for your school? <a href="https://wa.me/917708143295?text=Hi!%20I%20saw%20your%20website%20and%20would%20like%20to%20enquire%20about%20creating%20a%20website%20like%20this." target="_blank" rel="noopener">WhatsApp me →</a></span>
+      <span>✦ Need to enquire about creating a website like this? <b>+91 77081 43295</b> <a href="https://wa.me/917708143295?text=Hi!%20I'd%20like%20to%20enquire%20about%20creating%20a%20website%20like%20this." target="_blank" rel="noopener">Chat now</a></span>
+      <span>✦ Website creation for schools &amp; businesses — <b>fast, modern, mobile-first</b> <a href="https://wa.me/917708143295?text=Hi!%20Interested%20in%20a%20website%20like%20this." target="_blank" rel="noopener">Enquire →</a></span>
+    </div>
+    <button class="promo-x" onclick="closePromoBar()" aria-label="Close promo bar">✕</button>
+  </div>
+
+  <!-- TEMP PROMO: scroll-triggered popup (remove later) -->
+  <div class="promo-modal" id="promoModal">
+    <div class="promo-card">
+      <button class="x-top" onclick="closePromoModal()" aria-label="Cancel">✕</button>
+      <div class="emoji">💻✨</div>
+      <h3>Loved this website?</h3>
+      <p>I build websites like this for schools &amp; businesses. Need to enquire about creating one like this? Let's talk — happy to help!</p>
+      <a class="btn btn-wa" href="https://wa.me/917708143295?text=Hi!%20I%20saw%20your%20website%20and%20would%20like%20to%20enquire%20about%20creating%20a%20website%20like%20this." target="_blank" rel="noopener">WhatsApp +91 77081 43295</a>
+      <button class="cancel" onclick="closePromoModal()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- TEMP: floating "create a website like this" icon (remove later) -->
+  <a class="site-float" href="https://wa.me/917708143295?text=Hi!%20I'd%20like%20to%20enquire%20about%20creating%20a%20website%20like%20this." target="_blank" rel="noopener" title="Create a website like this">
+    <span class="si">💻</span>
+  </a>
+
   <a href="#wa" class="wa-float" onclick="return openWhatsApp()" title="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.1 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6-.1.2-.1.3-.3.5l-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.6-.1l.9-1c.2-.3.5-.3.8-.2l2 .9c.3.1.4.2.5.4.1.1.1.6-.1 1.3z"/></svg>
   </a>
@@ -653,6 +715,22 @@
       var th=document.getElementById('thanks');if(th)th.classList.remove('show');
       var form=document.querySelector('.form');if(form)form.style.display='';
       form.reset();return false;}
+    /* TEMP PROMO JS (remove with the promo elements later) */
+    function closePromoBar(){var b=document.getElementById('promoBar');if(b)b.style.display='none';}
+    function closePromoModal(){var m=document.getElementById('promoModal');if(m)m.classList.remove('show');}
+    (function(){
+      if(sessionStorage.getItem('promoShown'))return;
+      var shown=false;
+      window.addEventListener('scroll',function(){
+        if(!shown&&window.scrollY>1100){
+          shown=true;
+          sessionStorage.setItem('promoShown','1');
+          setTimeout(function(){
+            var m=document.getElementById('promoModal');if(m)m.classList.add('show');
+          },1500);
+        }
+      },{passive:true});
+    })();
   </script>
 </body>
 </html>
