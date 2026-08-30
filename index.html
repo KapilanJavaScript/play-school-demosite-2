@@ -20,6 +20,12 @@
   <meta name="geo.region" content="IN-TN" />
   <meta name="geo.placename" content="Maduravoyal, Chennai" />
   <meta name="theme-color" content="#F4C324" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Little Blossoms" />
 
   <meta property="og:title" content="Little Blossoms Playschool — Your Search Stops Here · Maduravoyal Chennai" />
   <meta property="og:description" content="Infant Care to UKG, exact-age programs, CCTV-safe campus, beloved by parents near Noombal. Enrol today." />
@@ -731,6 +737,12 @@
         }
       },{passive:true});
     })();
+    /* PWA: register service worker (installable + offline) */
+    if('serviceWorker' in navigator){
+      window.addEventListener('load',function(){
+        navigator.serviceWorker.register('sw.js').catch(function(err){console.log('SW error',err);});
+      });
+    }
   </script>
 </body>
 </html>
