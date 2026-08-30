@@ -65,6 +65,7 @@
     .btn-blue{background:var(--blue-grad);box-shadow:0 8px 20px -8px rgba(95,176,221,.7)}
     .btn-navy{background:linear-gradient(135deg,#35486b,var(--ink));box-shadow:0 8px 20px -10px rgba(34,49,77,.6)}
     .btn-wa{background:linear-gradient(135deg,#4cbb86,var(--green));box-shadow:0 8px 20px -8px rgba(58,157,110,.6)}
+    .btn-install{background:linear-gradient(135deg,#7b5cff,#5a3fd6);box-shadow:0 8px 20px -8px rgba(90,63,214,.6);color:#fff;display:inline-flex;align-items:center;gap:8px;font-weight:700}
 
     /* ---------- Flower divider (five-petal blossoms + petals, moving) ---------- */
     .cloud-wrap{position:relative;z-index:3;display:block;margin-bottom:-42px;pointer-events:none;overflow:hidden}
@@ -386,6 +387,7 @@
           <a href="#enrol" class="btn">Enrol Today</a>
           <a href="#parents" class="btn btn-blue">What Parents Say</a>
           <a href="#wa" class="btn btn-wa" onclick="return openWhatsApp()">WhatsApp Us</a>
+          <button id="installBtn" class="btn btn-install" style="display:none">📲 Install App</button>
         </div>
         <div class="hero-trust">
           <div class="t"><b data-count="5">0</b><span>Programs</span></div>
@@ -743,6 +745,23 @@
         navigator.serviceWorker.register('sw.js').catch(function(err){console.log('SW error',err);});
       });
     }
+    /* Install App button */
+    var deferredPrompt=null;
+    var installBtn=document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt',function(e){
+      e.preventDefault();
+      deferredPrompt=e;
+      if(installBtn)installBtn.style.display='inline-flex';
+    });
+    if(installBtn){
+      installBtn.addEventListener('click',function(){
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function(){deferredPrompt=null;if(installBtn)installBtn.style.display='none';});
+        }
+      });
+    }
+    window.addEventListener('appinstalled',function(){if(installBtn)installBtn.style.display='none';});
   </script>
 </body>
 </html>
